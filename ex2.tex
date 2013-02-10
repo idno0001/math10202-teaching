@@ -6,17 +6,34 @@
 \title{MATH10202 linear algebra}
 \subtitle{Exercise sheet 2: systems of linear equations}
 \author{}
-\date{}
+\date{\vspace{-5ex}}
 
 % Arabic numbering, then roman. (Underlying stuff: the enumitem package.)
-\setlist[enumerate,1]{label=Q\arabic*., ref=Q\arabic*}
+\setlist[enumerate,1]{label=2.\arabic*., ref=Q\arabic*}
 \setlist[enumerate,2]{label=(\roman*), ref=(\roman*)}
+
+% Starred questions: use \begin{modenumerate} .. .. \end{modenumerate} and then 
+% add stars to questions using \moditem{*}.
+% Source: 
+% http://tex.stackexchange.com/questions/21004/add-asterisk-after-labels-in-enumerate/21010#21010
+\newenvironment{modenumerate}
+  {\enumerate\setupmodenumerate}
+  {\endenumerate}
+\newif\ifmoditem
+\newcommand{\setupmodenumerate}{%
+  \global\moditemfalse
+  \let\origmakelabel\makelabel
+  \def\moditem##1{\global\moditemtrue\def\mesymbol{##1}\item}% 
+  \def\makelabel##1{%
+  \origmakelabel{##1\ifmoditem\rlap{\mesymbol}\fi\enspace}% 
+\global\moditemfalse}%
+}
 
 \begin{document}
 \maketitle
 
-\begin{enumerate}
-  \item Which of the following matrices are in reduced row-echelon form?
+\begin{modenumerate}
+  \moditem{*} Which of the following matrices are in reduced row-echelon form?
     \begin{multicols}{3}[\setlength{\columnseprule}{0pt}]
       \begin{enumerate}
         \item $
@@ -129,7 +146,7 @@
           $
       \end{enumerate}
     \end{multicols}
-  \item Consider the system of linear equations
+  \moditem{*} Consider the system of linear equations
     \begin{equation} \label{2.3} \tag{*}
       \sysdelim.\}\systeme{
         2x_2 + x_3 = -2,
@@ -157,8 +174,8 @@
       \item Solve the system \eqref{2.3}.
       \item What is the reduced row-echelon form of $A$?
     \end{enumerate}
-  \item (Variation on Gaussian elimination.) Consider the system of linear 
-    equations
+  \moditem{*} (Variation on Gaussian elimination.) Consider the system of 
+  linear equations
     \begin{equation} \label{2.4} \tag{**}
       \sysdelim.\}\systeme{
         6x_3 + 2x_4 - 4x_5 - 8x_6 = 8,
@@ -186,8 +203,8 @@
     \end{enumerate}
   \item Solve each of the following systems using Gaussian elimination.
     \begin{multicols}{2}[\setlength{\columnseprule}{0pt}]
-      \begin{enumerate}
-        \item
+      \begin{modenumerate}
+        \moditem{*}
           \[
             \sysdelim..\systeme{
               2x_1 - 3x_2 = -2,
@@ -204,7 +221,7 @@
               -6x_1 - 4x_2 + 2x_3 = 30.
             }
           \]
-        \item
+        \moditem{*}
           \[
             \sysdelim..\systeme{
               4x_1 - 8x_2 = 12,
@@ -222,9 +239,9 @@
               x_1 - 6x_2 + 3x_3 = 1.
             }
           \]
-      \end{enumerate}
+      \end{modenumerate}
     \end{multicols}
-\end{enumerate}
+\end{modenumerate}
 
 
 \end{document}
