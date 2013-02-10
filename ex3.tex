@@ -1,0 +1,177 @@
+\documentclass[english,12pt,a4paper]{scrartcl}
+\usepackage{multicol}
+\usepackage{systeme}
+\usepackage[cm]{anton}
+
+\title{MATH10202 linear algebra}
+\subtitle{Exercise sheet 3: elementary matrices and calculating $\bm{A^{-1}}$}
+\author{}
+\date{\vspace{-5ex}}
+
+% Arabic numbering, then roman. (Underlying stuff: the enumitem package.)
+\setlist[enumerate,1]{label=3.\arabic*., ref=Q\arabic*}
+\setlist[enumerate,2]{label=(\roman*), ref=(\roman*)}
+
+% Starred questions: use \begin{modenumerate} .. .. \end{modenumerate} and then 
+% add stars to questions using \moditem{*}.
+% Source: 
+% http://tex.stackexchange.com/questions/21004/add-asterisk-after-labels-in-enumerate/21010#21010
+\newenvironment{modenumerate}
+  {\enumerate\setupmodenumerate}
+  {\endenumerate}
+\newif\ifmoditem
+\newcommand{\setupmodenumerate}{%
+  \global\moditemfalse
+  \let\origmakelabel\makelabel
+  \def\moditem##1{\global\moditemtrue\def\mesymbol{##1}\item}% 
+  \def\makelabel##1{%
+  \origmakelabel{##1\ifmoditem\rlap{\mesymbol}\fi\enspace}% 
+\global\moditemfalse}%
+}
+
+\begin{document}
+\maketitle
+
+\begin{modenumerate}
+  \moditem{*} Which of the following are elementary matrices?
+    \begin{multicols}{3}[\setlength{\columnseprule}{0pt}]
+      \begin{enumerate}
+        \item $
+          \begin{pmatrix}
+            1 & 0 \\
+            -7 & 1
+          \end{pmatrix}
+          $
+        \item $
+          \begin{pmatrix}
+            1 & 0 \\
+            0 & 1 \\
+            1 & 0
+          \end{pmatrix}
+          $
+        \item $
+          \begin{pmatrix}
+            1 & 1 \\
+            1 & 0
+          \end{pmatrix}
+          $
+        \item $
+          \begin{pmatrix}
+            0 & 0 & 1 \\
+            0 & 1 & 0 \\
+            1 & 0 & 0
+          \end{pmatrix}
+          $
+        \item $
+          \begin{pmatrix}
+            1 & 0 & 0 \\
+            0 & 1 & 0 \\
+            0 & 0 & -3
+          \end{pmatrix}
+          $
+        \item $
+          \begin{pmatrix}
+            1 & 0 & 0 \\
+            0 & 2 & 0 \\
+            0 & 0 & -3
+          \end{pmatrix}
+          $
+      \end{enumerate}
+    \end{multicols}
+    For those that are elementary matrices, state the row operation that, when 
+    performend on the identity matrix, gives the elementary matrix.
+  \moditem{*} Let
+    \[
+      A =
+      \begin{pmatrix}
+        2 & 8 & 6 \\
+        4 & 2 & -2 \\
+        3 & -1 & 1
+      \end{pmatrix}.
+    \]
+    \begin{enumerate}[label=(\alph*),ref=(\alph*)]
+      \item \label{q3.2a} Adjoin the identity matrix $I_3$ to the right of $A$.
+      \item \label{q3.2b} Perform the following sequence of row operations (in 
+        the order given) to the matrix in \ref{q3.2a}:
+        \begin{multicols}{3}[\setlength{\columnseprule}{0pt}]
+          \begin{enumerate}[label=(\roman*),ref=(\roman*)]
+            \item $r_1 \to \frac{1}{2} r_1,$
+            \item $r_2 \to r_2 - 4r_1,$
+            \item $r_3 \to r_3 - 3r_1$,
+            \item $r_2 \to -\frac{1}{14} r_2$,
+            \item $r_1 \to r_1 - 4r_2$,
+            \item $r_3 \to r_3 + 13r_2$,
+            \item $r_3 \to \frac{1}{5} r_3$,
+            \item $r_1 \to r_1 + r_3$,
+            \item $r_2 \to r_2 - r_3$.
+          \end{enumerate}
+        \end{multicols}
+      \item Using the calculations in \ref{q3.2b}, write down $A^{-1}$, and 
+        check by direct matrix calculation that $AA^{-1} = I = A^{-1}A$.
+    \end{enumerate}
+  \item Let
+    \[
+      B =
+      \begin{pmatrix}
+        1 & -3 & 4 \\
+        2 & -5 & 7 \\
+        0 & -1 & 1
+      \end{pmatrix}.
+    \]
+    \begin{enumerate}[label=(\alph*),ref=(\alph*)]
+      \item \label{q3.3a} Adjoin the identity matrix $I_3$ to the right of $B$.
+      \item \label{q3.3b} Perform the following sequence of row operations (in 
+        the order given) to the matrix in \ref{q3.3a}:
+        \begin{multicols}{3}[\setlength{\columnseprule}{0pt}]
+          \begin{enumerate}[label=(\roman*),ref=(\roman*)]
+            \item $r_2 \to r_2 - 2r_1$,
+            \item $r_1 \to r_1 + 3r_2$,
+            \item $r_3 \to r_3 + r_2$.
+          \end{enumerate}
+        \end{multicols}
+      \item Is $B$ an invertible matrix?
+    \end{enumerate}
+  \moditem{*} Find the inverse (using row operations) of the given matrix if 
+  the matrix is invertible, and check your answer by matrix multiplication.
+    \begin{multicols}{3}[\setlength{\columnseprule}{0pt}]
+      \begin{enumerate}
+        \item $
+          \begin{pmatrix}
+            1 & 4 \\
+            2 & 7
+          \end{pmatrix}
+          $
+        \item $
+          \begin{pmatrix}
+            6 & -4 \\
+            -3 & 2
+          \end{pmatrix}
+          $
+        \item $
+          \begin{pmatrix}
+            3 & 4 & -1 \\
+            1 & 0 & 3 \\
+            2 & 5 & -4
+          \end{pmatrix}
+          $
+        \item $
+          \begin{pmatrix}
+            2 & 6 & 6 \\
+            2 & 7 & 6 \\
+            2 & 7 & 6
+          \end{pmatrix}
+          $
+        \item $
+          \begin{pmatrix}
+            1 & 0 & 1 \\
+            -1 & 1 & 1 \\
+            0 & 1 & 0
+          \end{pmatrix}
+          $.
+      \end{enumerate}
+    \end{multicols}
+\end{modenumerate}
+
+
+\end{document}
+
