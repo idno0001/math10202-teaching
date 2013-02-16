@@ -1,0 +1,233 @@
+\documentclass[english,12pt,a4paper]{scrartcl}
+\usepackage{multicol}
+\usepackage[cm]{anton}
+
+\renewcommand{\vec}[1]{\bm{#1}}
+
+\title{MATH10202 Linear Algebra A}
+\subtitle{Supplementary exercise sheet 4: determinants and eigenvalues}
+\author{}
+\date{\vspace{-4.5ex}}
+
+% Arabic numbering, then roman. (Underlying stuff: the enumitem package.)
+\setlist[enumerate,1]{label=S4.\arabic*., ref=S4.\arabic*}
+\setlist[enumerate,2]{label=(\roman*), ref=(\roman*)}
+
+% Starred questions: use \begin{modenumerate} .. .. \end{modenumerate} and then 
+% add stars to questions using \moditem{*}.
+% Source: 
+% http://tex.stackexchange.com/questions/21004/add-asterisk-after-labels-in-enumerate/21010#21010
+\newenvironment{modenumerate}
+  {\enumerate\setupmodenumerate}
+  {\endenumerate}
+\newif\ifmoditem
+\newcommand{\setupmodenumerate}{%
+  \global\moditemfalse
+  \let\origmakelabel\makelabel
+  \def\moditem##1{\global\moditemtrue\def\mesymbol{##1}\item}% 
+  \def\makelabel##1{%
+  \origmakelabel{##1\ifmoditem\rlap{\mesymbol}\fi\enspace}% 
+\global\moditemfalse}%
+}
+
+\begin{document}
+\maketitle
+
+\vspace{-5ex}
+\noindent \textbf{Disclaimer:} The following exercises may contain material 
+outside the scope of the course.
+
+\section*{Determinants}
+\begin{enumerate}
+  \item % Q7.5
+    In the following, use the properties of determinants to evaluate the given 
+    determinant by inspection, noticing certain special properties.  Explain 
+    your reasoning.
+    \begin{multicols}{4}
+      \begin{enumerate}
+        \item $
+          \begin{vmatrix}
+            3 & 1 & 0 \\
+            0 & -2 & 5 \\
+            0 & 0 & 4
+          \end{vmatrix}
+          $
+        \item $
+          \begin{vmatrix}
+            2 & 3 & -4 \\
+            1 & -3 & -2 \\
+            -1 & 5 & 2
+          \end{vmatrix}
+          $
+        \item $
+          \begin{vmatrix}
+            4 & 1 & 3 \\
+            -2 & 0 & -2 \\
+            5 & 4 & 1
+          \end{vmatrix}
+          $
+        \item $
+          \begin{vmatrix}
+            0 & 2 & 0 & 0 \\
+            -3 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 4 \\
+            0 & 0 & 1 & 0
+          \end{vmatrix}
+          $.
+      \end{enumerate}
+    \end{multicols}
+  \item % Q7.6
+    Suppose that
+    \[
+      \begin{vmatrix}
+        a & b & c \\
+        d & e & f \\
+        g & h & i
+      \end{vmatrix}
+       = 4.
+    \]
+    Find the following determinants.
+    \begin{multicols}{3}
+      \begin{enumerate}
+        \item $
+          \begin{vmatrix}
+            2a & 2b & 2c \\
+            d & e & f \\
+            g & h & i
+          \end{vmatrix}
+          $
+        \item $
+          \begin{vmatrix}
+            d & e & f \\
+            a & b & c \\
+            g & h & i
+          \end{vmatrix}
+          $
+        \item $
+          \begin{vmatrix}
+            2c & b & a \\
+            2f & e & d \\
+            2i & h & g
+          \end{vmatrix}
+          $.
+      \end{enumerate}
+    \end{multicols}
+  \item % Q7.7
+    Find all values of $k$ for which
+    \[
+      A =
+      \begin{pmatrix}
+        k & -k & 3 \\
+        0 & k + 1 & 1 \\
+        k & -8 & k - 1
+      \end{pmatrix}
+    \]
+    is invertible.
+  \item % Q7.8
+    Suppose that $A$ and $B$ are $n \times n$ matrices, with $\det(A) = 3$ and 
+    $\det(B) = -2$. Find the following determinants.
+    \begin{multicols}{3}
+      \begin{enumerate}
+        \item $\det(AB)$
+        \item $\det(B^{-1}A)$
+        \item $\det(3B^T)$.
+      \end{enumerate}
+    \end{multicols}
+  \item % Q7.10
+    Suppose that $A$ and $B$ are $n \times n$ matrices.
+    \begin{enumerate}
+      \item Prove that $\det(AB) = \det(BA)$.
+      \item If $A$ is \key{idempotent} (that is, $A^2 = A$), find all possible 
+        values of $\det(A)$.
+    \end{enumerate}
+\end{enumerate}
+
+\section*{Eigenvalues, eigenvectors and eigenspaces}
+\begin{enumerate}[start=6]
+  \item % Q8.2
+    Suppose that $A$ is a $2 \times 2$ matrix with eigenvectors
+    \[
+      \vec{v_1} =
+      \begin{pmatrix}
+        1 \\ -1
+      \end{pmatrix}
+      \quad \text{and} \quad
+      \vec{v_2} =
+      \begin{pmatrix}
+        1 \\ 1
+      \end{pmatrix}
+    \]
+    corresponding to eigenvalues $\lambda_1 = \frac{1}{2}$ and $\lambda_2 = 2$, 
+    respectively. Let
+    \[
+      \vec{x} =
+      \begin{pmatrix}
+        5 \\ 1
+      \end{pmatrix}.
+    \]
+    Find $A^{10}\vec{x}$.
+  \item % Q8.3
+    Suppose that $A$ is a $3 \times 3$ matrix with eigenvectors
+    \[
+      \vec{v_1} =
+      \begin{pmatrix}
+        1 \\ 0 \\ 0
+      \end{pmatrix}
+      ,
+      \quad
+      \vec{v_2} =
+      \begin{pmatrix}
+        1 \\ 1 \\ 0
+      \end{pmatrix}
+      ,
+      \quad
+      \vec{v_3} =
+      \begin{pmatrix}
+        1 \\ 1 \\ 1
+      \end{pmatrix}
+    \]
+    corresponding to eigenvalues $\lambda_1 = -\frac{1}{3}$, $\lambda_2 = 
+    \frac{1}{3}$ and $\lambda_3 = 1$, respectively. Let
+    \[
+      \vec{x} =
+      \begin{pmatrix}
+        2 \\ 1 \\ 2
+      \end{pmatrix}.
+    \]
+    Find $A^{20}\vec{x}$.
+  \item % Q8.4
+    \begin{enumerate}
+      \item Let $A$ be a square matrix $A$. Show that $A$ and $A^T$ have the 
+        same characteristic polynomial and hence the same eigenvalues.
+      \item Give an example of a $2 \times 2$ matrix $A$ for which $A^T$ and 
+        $A$ have different eigenspaces.
+    \end{enumerate}
+  \item % Q8.5
+    Let $A$ be an idempotent matrix (that is, $A^2 = A$). Show that $\lambda = 
+    0$ and $\lambda = 1$ are the only possible eigenvalues of $A$. [Hint: 
+    consider eigenvectors.]
+  \item \label{q8.6} % Q8.6
+    Let $\vec{v}$ be an eigenvector of a matrix $A$ corresponding to eigenvalue 
+    $\lambda$. Prove that $\vec{v}$ is also an eigenvector for $A + kI$ 
+    corresponding to eigenvalue $\lambda + k$.
+  \item % Q8.7
+    Let
+    \[
+      A =
+      \begin{pmatrix}
+        3 & 2 \\
+        5 & 0
+      \end{pmatrix}.
+    \]
+    \begin{enumerate}
+      \item Find the eigenvalues and eigenspaces of $A$.
+      \item Using \ref{q8.6} and any other results that you may know, find the 
+        eigenvalues and eigenspaces of $A^{-1}$, $A - 2I$ and $A + 2I$.
+    \end{enumerate}
+  \item % Q8.8
+    If $A$ and $B$ are row equivalent matrices, do they necessarily have the 
+    same eigenvalues? If yes, prove it; otherwise, give a counterexample.
+\end{enumerate}
+
+\end{document}
+
