@@ -1,0 +1,125 @@
+\documentclass[english,12pt,a4paper]{scrartcl}
+\usepackage{multicol}
+\usepackage{systeme}
+\usepackage[cm]{anton}
+
+\title{MATH10202 linear algebra}
+\subtitle{Exercise sheet 4: determinants and eigenvalues}
+\author{}
+\date{\vspace{-5ex}}
+
+% Arabic numbering, then roman. (Underlying stuff: the enumitem package.)
+\setlist[enumerate,1]{label=4.\arabic*., ref=Q\arabic*}
+\setlist[enumerate,2]{label=(\roman*), ref=(\roman*)}
+
+% Starred questions: use \begin{modenumerate} .. .. \end{modenumerate} and then 
+% add stars to questions using \moditem{*}.
+% Source: 
+% http://tex.stackexchange.com/questions/21004/add-asterisk-after-labels-in-enumerate/21010#21010
+\newenvironment{modenumerate}
+  {\enumerate\setupmodenumerate}
+  {\endenumerate}
+\newif\ifmoditem
+\newcommand{\setupmodenumerate}{%
+  \global\moditemfalse
+  \let\origmakelabel\makelabel
+  \def\moditem##1{\global\moditemtrue\def\mesymbol{##1}\item}% 
+  \def\makelabel##1{%
+  \origmakelabel{##1\ifmoditem\rlap{\mesymbol}\fi\enspace}% 
+\global\moditemfalse}%
+}
+
+\begin{document}
+\maketitle
+
+\begin{modenumerate}
+  \moditem{*} Evaluate $\det(A)$ by cofactor expansion along the given 
+  row/column.
+    \begin{enumerate}
+      \item $A =
+        \begin{pmatrix}
+          -3 & 0 & 7 \\
+          2 & 5 & 1 \\
+          -1 & 0 & 5
+        \end{pmatrix}
+        $ 1st row
+      \item $A =
+        \begin{pmatrix}
+          3 & 3 & 1 \\
+          1 & 0 & -4 \\
+          1 & -3 & 5
+        \end{pmatrix}
+        $ 2nd row and 2nd column
+      \item $A =
+        \begin{pmatrix}
+          3 & 3 & 0 & 5 \\
+          2 & 2 & 0 & -2 \\
+          4 & 1 & -3 & 0 \\
+          2 & 10 & 3 & 2
+        \end{pmatrix}
+        $ 3rd column
+    \end{enumerate}
+  \moditem{*} Evaluate $\det(A)$ by any method you wish.
+    \begin{multicols}{2}[\setlength{\columnseprule}{0pt}]
+      \begin{enumerate}
+        \item $A =
+          \begin{pmatrix}
+            2 & 3 & -1 \\
+            5 & -7 & 1 \\
+            -3 & 2 & -1
+          \end{pmatrix}
+          $
+        \item $A =
+          \begin{pmatrix}
+            5 & 2 & 4 & 0 \\
+            2 & -3 & -1 & 2 \\
+            3 & -4 & 3 & 7 \\
+            1 & -1 & 0 & 1
+          \end{pmatrix}
+          $
+        \item $A =
+          \begin{pmatrix}
+            1 & -2 & -3 \\
+            6 & 7 & -1 \\
+            -3 & 1 & 4
+          \end{pmatrix}
+          $.
+      \end{enumerate}
+    \end{multicols}
+  \moditem{*} For each of the following matrices, find (a) the characteristic 
+  polynomial; (b) the eigenvalues; and (c) the general form of eigenvectors for 
+  each eigenvalue
+    \begin{multicols}{2}[\setlength{\columnseprule}{0pt}]
+      \begin{enumerate}
+        \item $
+          \begin{pmatrix}
+            3 & 0 \\
+            8 & -1
+          \end{pmatrix}
+          $
+        \item $
+          \begin{pmatrix}
+            10 & -9 \\
+            4 & -2
+          \end{pmatrix}
+          $
+        \item $
+          \begin{pmatrix}
+            4 & 0 & 1 \\
+            -2 & 1 & 0 \\
+            -2 & 0 & 1
+          \end{pmatrix}
+          $
+        \item $
+          \begin{pmatrix}
+            2 & -3 & 1 \\
+            1 & -2 & 1 \\
+            1 & -3 & 2
+          \end{pmatrix}
+          $.
+      \end{enumerate}
+    \end{multicols}
+\end{modenumerate}
+
+\end{document}
+
