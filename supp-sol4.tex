@@ -1,0 +1,291 @@
+\documentclass[english,12pt,a4paper]{scrartcl}
+\usepackage{multicol}
+\usepackage[cm]{anton}
+
+\renewcommand{\vec}[1]{\bm{#1}}
+
+\title{MATH10202 Linear Algebra A}
+\subtitle{Supplementary exercise sheet 4 solutions}
+\author{}
+\date{\vspace{-4.5ex}}
+
+% Arabic numbering, then roman. (Underlying stuff: the enumitem package.)
+\setlist[enumerate,1]{label=S4.\arabic*., ref=S4.\arabic*}
+\setlist[enumerate,2]{label=(\roman*), ref=(\roman*)}
+
+% Starred questions: use \begin{modenumerate} .. .. \end{modenumerate} and then 
+% add stars to questions using \moditem{*}.
+% Source: 
+% http://tex.stackexchange.com/questions/21004/add-asterisk-after-labels-in-enumerate/21010#21010
+\newenvironment{modenumerate}
+  {\enumerate\setupmodenumerate}
+  {\endenumerate}
+\newif\ifmoditem
+\newcommand{\setupmodenumerate}{%
+  \global\moditemfalse
+  \let\origmakelabel\makelabel
+  \def\moditem##1{\global\moditemtrue\def\mesymbol{##1}\item}% 
+  \def\makelabel##1{%
+  \origmakelabel{##1\ifmoditem\rlap{\mesymbol}\fi\enspace}% 
+\global\moditemfalse}%
+}
+
+% Redefine matrix stuff for augemented matrices.
+% Source: 
+% http://tex.stackexchange.com/questions/2233/whats-the-best-way-make-an-augmented-coefficient-matrix/2244#2244
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\begin{document}
+\maketitle
+
+\vspace{-5ex}
+
+\section*{Determinants}
+\textbf{Notation:} It is standard to write the determinant of a matrix $A$ as 
+$\begin{vmatrix}A\end{vmatrix} = \det(A)$.
+
+\begin{enumerate}
+  \item % Q7.5
+    \begin{enumerate}
+      \item The determinant is $-24$: the determinant of a triangular matrix is 
+        the product of its diagonal elements.
+      \item The determinant is $0$: we have
+        \[
+          \begin{vmatrix}
+            2 & 3 & -4 \\
+            1 & -3 & -2 \\
+            -1 & 5 & 2
+          \end{vmatrix}
+          \refrel{$c_3 \to c_3 + 2c_1$}{=}
+          \begin{vmatrix}
+            2 & 3 & 0 \\
+            1 & -3 & 0 \\
+            -1 & 5 & 0
+          \end{vmatrix}
+          = 0
+        \]
+      \item The determinant is $0$: we have
+        \[
+          \begin{vmatrix}
+            4 & 1 & 3 \\
+            -2 & 0 & -2 \\
+            5 & 4 & 1
+          \end{vmatrix}
+          \refrel{$c_1 \to c_1 - c_3$}{=}
+          \begin{vmatrix}
+            1 & 1 & 3 \\
+            0 & 0 & -2 \\
+            4 & 4 & 1
+          \end{vmatrix}
+          = 0.
+        \]
+      \item The determinant is $-24$: this is easy by cofactor expansion along 
+        any row or column. We could also swap rows so that we have a triangular 
+        matrix. Remember that a row (or column) swap switches the sign of the 
+        determinant. (We need two row swaps, which means that the sign changes 
+        back, but this is something to remember!)
+    \end{enumerate}
+  \item % Q7.6
+    Suppose that
+    \[
+      \begin{vmatrix}
+        a & b & c \\
+        d & e & f \\
+        g & h & i
+      \end{vmatrix}
+       = 4.
+    \]
+    Find the following determinants.
+    \begin{enumerate}
+      \item $8$ (we get this matrix multiplying $r_1$ by $2$).
+      \item $-4$ (sign changes when we swap two rows).
+      \item $-8$ (a combination of the above).
+    \end{enumerate}
+  \item % Q7.7
+    From the lectures, we know that a matrix is invertible if and only if its 
+    determinant is nonzero. We start with
+    \begin{align*}
+      \det(A) &=
+      \begin{vmatrix}
+        k & -k & 3 \\
+        0 & k + 1 & 1 \\
+        k & -8 & k - 1
+      \end{vmatrix} \\
+      &= k[(k + 1)(k - 1) + 8] + 0 + k[-k - 3(k + 1)] \\
+      &= k^3 - 4k^2 + 4k \\
+      &= k(k - 2)^2.
+    \end{align*}
+    So $A$ is invertible for all $k \ne 0$, $2$.
+  \item % Q7.8
+    \begin{enumerate}
+      \item $\det(AB) = \det(A)\det(B) = -6$.
+      \item $\det(B^{-1}A) = (1 / \det(B)) \det(A) = -3 / 2$.
+      \item $\det(3B^T) = 3^n \det(B) = -3^n \cdot 2$. We get the $3^n$ term 
+        because we are multiplying matrix by the scalar $3$, which is the same 
+        as multiplying each of the $n$ rows (or columns) by $3$. Also remember 
+        that $\det(B^T) = \det(B)$.
+    \end{enumerate}
+  \item % Q7.10
+    \begin{enumerate}
+      \item $\det(AB) = \det(A)\det(B) = \det(B)\det(A) = \det(BA)$.
+      \item Since $A^2 = A$, we have $\det(A) = \det(A^2) = (\det(A))^2$.  
+        Therefore we must have $\det(A) = 0$ or $1$.
+    \end{enumerate}
+\end{enumerate}
+
+\section*{Eigenvalues, eigenvectors and eigenspaces}
+\begin{enumerate}[start=6]
+  \item % Q8.2
+    We use the following theorem:
+    \begin{theorem}
+      Let $A$ be an $n \times n$ matrix with eigenvector $\vec{x}$ 
+      corresponding to eigenvalue $\lambda$. Then
+      \begin{enumerate}
+        \item $A^n$ has eigenvector $\vec{x}$ corresponding to eigenvalue 
+          $\lambda^n$ for all positive integers $n$.
+        \item If $A$ is invertible, then $A^{-1}$ has eigenvector $\vec{x}$ 
+          corresponding to eigenvalue $\lambda^{-1}$.
+        \item If $A$ is invertible, then $A^{n}$ has eigenvector $\vec{x}$ 
+          corresponding to eigenvalue $\lambda^n$ for all $n \in \integers$.
+      \end{enumerate}
+    \end{theorem}
+    
+    First, we represent $\vec{x}$ as a linear combination of $\vec{v_1}$ and 
+    $\vec{v_2}$, that is, we solve
+    \[
+      [\vec{v_1} \vec{v_2} | \vec{x}] =
+      \begin{pmatrix}[rr|r]
+        1 & 1 & 5 \\
+        -1 & 1 & 1
+      \end{pmatrix}
+      \refrel{$r_2 \to r_2 + r_1$}{\to}
+      \begin{pmatrix}[rr|r]
+        1 & 1 & 5 \\
+        0 & 2 & 6
+      \end{pmatrix}
+    \]
+    so $2\vec{v_1} + 3\vec{v_2} = \vec{x}$. Then using the theorem we have
+    \begin{align*}
+      A^{10}\vec{x} &= A^{10}(2\vec{v_1} + 3\vec{v_2}) \\
+      &= 2A^{10}\vec{v_1} + 3A^{10}\vec{v_2} \\
+      &= 2\lambda_1^{10}\vec{v_1} + 3\lambda_2^{10}\vec{v_2} \\
+      &= 2 \cdot \frac{1}{2^{10}} \vec{v_1} + 3 \cdot 2^{10}\vec{v_2} \\
+      &= \frac{1}{2^9} \begin{pmatrix} 1 \\ -1 \end{pmatrix} + 3 \cdot 2^{10} 
+      \begin{pmatrix} 1 \\ 1 \end{pmatrix} \\
+      &= \begin{pmatrix} 3072 \frac{1}{512} \\ 3071 \frac{511}{512}
+      \end{pmatrix}.
+    \end{align*}
+  \item % Q8.3
+    We write $\vec{x} = \vec{v_1} - \vec{v_2} + 2\vec{v_3}$. Using the same 
+    approach as the previous question we get
+    \[
+      A^{20}\vec{x} =
+      \begin{pmatrix}
+        2 \\ 2 - \frac{1}{3^{20}} \\ 2
+      \end{pmatrix}.
+    \]
+  \item % Q8.4
+    \begin{enumerate}
+      \item $\det(A^T - \lambda I) = \det(A^T - \lambda I^T) = \det(A - \lambda 
+        I)^T = \det(A - \lambda I)$.
+      \item Let
+        \[
+          A =
+          \begin{pmatrix}
+            1 & 1 \\
+            0 & 1
+          \end{pmatrix}
+          \quad \text{so that} \quad
+          A^T =
+          \begin{pmatrix}
+            1 & 0 \\
+            1 & 1
+          \end{pmatrix}.
+        \]
+        Notice that $A$ has eigenvalue $\lambda = 1$ with eigenspace
+        \[
+          E_1 = \Set{\begin{pmatrix} t \\ 0 \end{pmatrix} : t \in \reals}.
+        \]
+        (This is the set of all eigenvectors corresponding to the eigenvalue 
+        $1$, together with the zero vector.)
+        
+        On the other hand, while $A^T$ still has eigenvalue $1$, the 
+        corresponding eigenspace is
+        \[
+          E_1 = \Set{\begin{pmatrix} 0 \\ t \end{pmatrix} : t \in \reals}.
+        \]
+    \end{enumerate}
+  \item % Q8.5
+    \label{q8.6}
+    Let $A\vec{x} = \lambda\vec{x}$, so $A^2\vec{x} = A\lambda\vec{x} = 
+    \lambda^2\vec{x}$. But if $A^2 = A$, then we must have $\lambda^2\vec{x} = 
+    \lambda\vec{x}$. Since $\vec{x} \ne 0$, we must have $\lambda = 0$ or $1$.
+  \item \label{q8.6} % Q8.6
+    $(A + kI)\vec{v} = A\vec{v} + (kI)\vec{v} = \lambda\vec{v} + k\vec{v} = 
+    (\lambda + k)\vec{v}$.
+  \item % Q8.7
+    \begin{enumerate}
+      \item Eigenvalues are $5$ and $-2$. The eigenspace for $\lambda = 5$ is
+        \[
+          E_5 = \Set{\begin{pmatrix} t \\ t \end{pmatrix} : t \in \reals}.
+        \]
+        The eigenspace for $\lambda = -2$ is
+        \[
+          E_{-2} = \Set{\begin{pmatrix} -\frac{2}{5} t \\ t \end{pmatrix} : t 
+        \in \reals}.
+        \]
+      \item Using the theorem above, we know that $A^{-1}$ has eigenvalues 
+        $\frac{1}{5}$ and $-\frac{1}{2}$ with corresponding eigenspaces
+        \[
+          E_{\frac{1}{5}} = E_5 = \Set{\begin{pmatrix} t \\ t \end{pmatrix} : t 
+        \in \reals}
+          \quad \text{and} \quad
+          E_{-\frac{1}{2}} = E_{-2} = \Set{\begin{pmatrix} -\frac{2}{5} t \\ t 
+          \end{pmatrix} : t \in \reals}.
+        \]
+       
+        Using \ref{q8.6}, $A - 2I$ has eigenvalues $3$ and $-4$ with 
+        eigenspaces
+        \[
+          E_3 = E_5 = \Set{\begin{pmatrix} t \\ t \end{pmatrix} : t \in \reals}
+          \quad \text{and} \quad
+          E_{-4} = E_{-2} = \Set{\begin{pmatrix} -\frac{2}{5} t \\ t 
+          \end{pmatrix} : t \in \reals}.
+        \]
+        Finally, $A + 2I$ has eigenvalues $7$ and $0$ with eigenspaces
+        \[
+          E_7 = E_5 = \Set{\begin{pmatrix} t \\ t \end{pmatrix} : t \in \reals}
+          \quad \text{and} \quad
+          E_0 = E_{-2} = \Set{\begin{pmatrix} -\frac{2}{5} t \\ t \end{pmatrix} 
+        : t \in \reals}.
+        \]
+    \end{enumerate}
+  \item % Q8.8
+    No. For example, consider $1 \times 1$ matrices. Then if we multiply the 
+    row by a nonzero scalar, we get a different eigenvalues.
+    
+    Another example: consider the $2 \times 2$ matrices
+    \[
+      \begin{pmatrix}
+        1 & 1 \\
+        0 & 0
+      \end{pmatrix}
+      \refrel{$r_2 \to r_2 + r_1$}{\to}
+      \begin{pmatrix}
+        1 & 1 \\
+        1 & 1
+      \end{pmatrix}.
+    \]
+    Note that both matrices have the same determinant, yet the first has 
+    eigenvalues $1$ and $0$, while the latter has eigenvalues $2$ and $0$.  
+    (Therefore determinant-preserving row operations can still change the 
+    eigenvalues.)
+\end{enumerate}
+
+\end{document}
+
