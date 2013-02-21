@@ -1,5 +1,6 @@
 \documentclass[english,12pt,a4paper]{scrartcl}
 \usepackage{multicol}
+\usepackage{mdframed}
 \usepackage[cm]{anton}
 
 \renewcommand{\vec}[1]{\bm{#1}}
@@ -142,18 +143,23 @@ $\begin{vmatrix}A\end{vmatrix} = \det(A)$.
 \begin{enumerate}[start=6]
   \item % Q8.2
     We use the following theorem:
-    \begin{theorem}
-      Let $A$ be an $n \times n$ matrix with eigenvector $\vec{x}$ 
-      corresponding to eigenvalue $\lambda$. Then
-      \begin{enumerate}
-        \item $A^n$ has eigenvector $\vec{x}$ corresponding to eigenvalue 
-          $\lambda^n$ for all positive integers $n$.
-        \item If $A$ is invertible, then $A^{-1}$ has eigenvector $\vec{x}$ 
-          corresponding to eigenvalue $\lambda^{-1}$.
-        \item If $A$ is invertible, then $A^{n}$ has eigenvector $\vec{x}$ 
-          corresponding to eigenvalue $\lambda^n$ for all $n \in \integers$.
-      \end{enumerate}
-    \end{theorem}
+    \begin{mdframed}
+      \begin{theorem}
+        Let $A$ be an $n \times n$ matrix with eigenvector $\vec{x}$ 
+        corresponding to eigenvalue $\lambda$. Then
+        \begin{enumerate}
+          \item $A^n$ has eigenvector $\vec{x}$ corresponding to eigenvalue 
+            $\lambda^n$ for all positive integers $n$.
+          \item If $A$ is invertible, then $A^{-1}$ has eigenvector $\vec{x}$ 
+            corresponding to eigenvalue $\lambda^{-1}$.
+          \item If $A$ is invertible, then $A^{n}$ has eigenvector $\vec{x}$ 
+            corresponding to eigenvalue $\lambda^n$ for all $n \in \integers$.
+        \end{enumerate}
+      \end{theorem}
+
+      (The proof of this theorem is straightforward. If you want me to prove it, 
+      please email me or come to my office and we can chat about it.)
+    \end{mdframed}
     
     First, we represent $\vec{x}$ as a linear combination of $\vec{v_1}$ and 
     $\vec{v_2}$, that is, we solve
@@ -221,7 +227,6 @@ $\begin{vmatrix}A\end{vmatrix} = \det(A)$.
         \]
     \end{enumerate}
   \item % Q8.5
-    \label{q8.6}
     Let $A\vec{x} = \lambda\vec{x}$, so $A^2\vec{x} = A\lambda\vec{x} = 
     \lambda^2\vec{x}$. But if $A^2 = A$, then we must have $\lambda^2\vec{x} = 
     \lambda\vec{x}$. Since $\vec{x} \ne 0$, we must have $\lambda = 0$ or $1$.
