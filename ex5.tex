@@ -1,0 +1,106 @@
+\documentclass[english,12pt,a4paper]{scrartcl}
+\usepackage{multicol}
+\usepackage{mdframed}
+\usepackage[cm]{anton}
+
+\title{MATH10202 linear algebra}
+\subtitle{Exercise sheet 5: vectors and subspaces of $\reals^n$}
+\author{}
+\date{\vspace{-5ex}}
+
+% Arabic numbering, then roman. (Underlying stuff: the enumitem package.)
+\setlist[enumerate,1]{label=5.\arabic*., ref=5.\arabic*}
+\setlist[enumerate,2]{label=(\roman*), ref=(\roman*)}
+\setlist[enumerate,3]{label=(\alph*), ref=(\alph*)}
+
+% Starred questions: use \begin{modenumerate} .. .. \end{modenumerate} and then 
+% add stars to questions using \moditem{*}.
+% Source: 
+% http://tex.stackexchange.com/questions/21004/add-asterisk-after-labels-in-enumerate/21010#21010
+\newenvironment{modenumerate}
+  {\enumerate\setupmodenumerate}
+  {\endenumerate}
+\newif\ifmoditem
+\newcommand{\setupmodenumerate}{%
+  \global\moditemfalse
+  \let\origmakelabel\makelabel
+  \def\moditem##1{\global\moditemtrue\def\mesymbol{##1}\item}% 
+  \def\makelabel##1{%
+  \origmakelabel{##1\ifmoditem\rlap{\mesymbol}\fi\enspace}% 
+\global\moditemfalse}%
+}
+
+\DeclareMathOperator{\spn}{span}
+\newcommand\spanset[1]{\ensuremath{\spn\set{#1}}}
+
+\begin{document}
+\maketitle
+
+\begin{modenumerate}
+  \moditem{*} Express the following (if possible) as a linear combination of $u 
+  = (0, -2, 2)$ and $v = (1, 3, -1)$.
+  \begin{multicols}{4}
+    \begin{enumerate}
+      \item $(2, 2, 2)$;
+      \item $(3, 1, 5)$;
+      \item $(0, 4, 5)$;
+      \item $(0, 0, 0)$.
+    \end{enumerate}
+  \end{multicols}
+  Which of $(2, 2, 2)$, $(3, 1, 5)$, $(0, 4, 5)$ and $(0, 0, 0)$ are in 
+  $\spanset{u, v}$?
+  \moditem{*} Which of the following subsets of $\reals^3$ are subspaces of 
+  $\reals^3$?
+  \begin{multicols}{2}
+    \begin{enumerate}
+      \item $\set{(a, 0, 0) | a \in \reals}$;
+      \item $\set{(a, 1, 1) | a \in \reals}$;
+      \item $\set{(a, b, c) | a, b, c \in \reals \text{ and } b = a + c}$;
+      \item $\set{(a, b, c) | a, b, c \in \integers}$.
+    \end{enumerate}
+  \end{multicols}
+  \moditem{*} Let $A$ be an $n \times n$ matrix over $\reals$, and let $V$ be 
+  the set of all $n \times 1$ matrices over $\reals$ (which may be identified 
+  with $\reals^n$). For $\lambda \in \reals$ we define the following subset of 
+  $V$
+  \[
+    V_\lambda = \set{v \in V | Av = \lambda v}.
+  \]
+  Prove that $V_\lambda$ is a subspace of $V$.
+  
+  \begin{mdframed}
+    Comment: If $V \ne \set{
+        (0 , 0 , \dots , 0)^T
+    }$, then $\lambda$ is an eigenvalue of $A$ and $V_\lambda$ consists of the 
+    zero vector and the eigenvectors corresponding to $\lambda$.
+  \end{mdframed}
+  \item Which of the following sets of vectors are linearly independent and 
+    which are linearly dependent?
+    \begin{enumerate}
+      \item (In $\reals^2$)
+        \begin{multicols}{2}
+          \begin{enumerate}
+            \item $\set{(2, 1), (3, 0)}$
+            \item $\set{(3, 9), (-4, -12)}$
+          \end{enumerate}
+        \end{multicols}
+      \item (In $\reals^3$)
+        \begin{multicols}{2}
+          \begin{enumerate}
+            \item $\set{(1, -1, 2), (1, 1, 2), (0, 0, 1)}$
+            \item $\set{(1, -1, 2), (-1, 1, 2), (0, 0, 1)}$
+            \item $\set{(-1, 3, 4), (0, 0, 0), (2, 1, 4)}$
+          \end{enumerate}
+        \end{multicols}
+    \end{enumerate}
+  \moditem{*} Determine whether or not the given set of vectors is a basis.
+  \begin{enumerate}
+    \item $\set{(-1, 1), (1, 2)}$ for $\reals^2$
+    \item $\set{(-1, 3, 4), (1, 5, -1), (1, 13, 2)}$ for $\reals^3$
+    \item $\set{(2, 1, 0, 2), (2, -3, 1, 0), (3, 2, 0, 0), (5, 0, 0, 0)}$ for 
+      $\reals^4$.
+  \end{enumerate}
+\end{modenumerate}
+
+\end{document}
+
