@@ -3,6 +3,8 @@
 \usepackage{mdframed}
 \usepackage[cm]{anton}
 
+\renewcommand{\vec}[1]{\bm{#1}}
+
 \title{MATH10202 linear algebra}
 \subtitle{Exercise sheet 5: vectors and subspaces of $\reals^n$}
 \author{}
@@ -64,7 +66,7 @@
   with $\reals^n$). For $\lambda \in \reals$ we define the following subset of 
   $V$
   \[
-    V_\lambda = \set{v \in V | Av = \lambda v}.
+    V_\lambda = \set{\vec{v} \in V | A\vec{v} = \lambda \vec{v}}.
   \]
   Prove that $V_\lambda$ is a subspace of $V$.
   
