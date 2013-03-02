@@ -1,0 +1,83 @@
+\documentclass[english,12pt,a4paper]{scrartcl}
+\usepackage{multicol}
+\usepackage{mdframed}
+\usepackage[cm]{anton}
+
+\renewcommand{\vec}[1]{\bm{#1}}
+
+\title{MATH10202 linear algebra}
+\subtitle{Exercise sheet 6: Gram-Schmidt and orthogonal diagonalisation}
+\author{}
+\date{\vspace{-5ex}}
+
+% Arabic numbering, then roman. (Underlying stuff: the enumitem package.)
+\setlist[enumerate,1]{label=6.\arabic*., ref=6.\arabic*}
+\setlist[enumerate,2]{label=(\roman*), ref=(\roman*)}
+\setlist[enumerate,3]{label=(\alph*), ref=(\alph*)}
+
+% Starred questions: use \begin{modenumerate} .. .. \end{modenumerate} and then 
+% add stars to questions using \moditem{*}.
+% Source: 
+% http://tex.stackexchange.com/questions/21004/add-asterisk-after-labels-in-enumerate/21010#21010
+\newenvironment{modenumerate}
+  {\enumerate\setupmodenumerate}
+  {\endenumerate}
+\newif\ifmoditem
+\newcommand{\setupmodenumerate}{%
+  \global\moditemfalse
+  \let\origmakelabel\makelabel
+  \def\moditem##1{\global\moditemtrue\def\mesymbol{##1}\item}% 
+  \def\makelabel##1{%
+  \origmakelabel{##1\ifmoditem\rlap{\mesymbol}\fi\enspace}% 
+\global\moditemfalse}%
+}
+
+\DeclareMathOperator{\spn}{span}
+\newcommand\spanset[1]{\ensuremath{\spn\set{#1}}}
+
+\begin{document}
+\maketitle
+
+\begin{modenumerate}
+  \moditem{*} Verify that the vectors $\vec{v_1} = (-\frac{3}{5}, \frac{4}{5}, 
+  0)$, $\vec{v_2} = (\frac{4}{5}, \frac{3}{5}, 0)$, $\vec{v_3} = (0, 0, 1)$ 
+  form an orthonormal basis for $\reals^3$ and express each of the following as 
+  linear combinations of $\vec{v_1}$, $\vec{v_2}$ and $\vec{v_3}$.
+  \begin{multicols}{3}
+    \begin{enumerate}
+      \item $(1, -1, 2)$;
+      \item $(3, -7, 4)$;
+      \item $(\frac{1}{7}, -\frac{3}{7}, \frac{5}{7})$.
+    \end{enumerate}
+  \end{multicols}
+  \moditem{*} Use the Gram-Schmidt process to transform the following bases 
+  $\set{\vec{u_1}, \vec{u_2}, \vec{u_3}}$ of $\reals^3$ into an orthonormal 
+  basis.
+  \begin{enumerate}
+    \item $\vec{u_1} = (1, 0, 1)$, $\vec{u_2} = (1, 0, -1)$, $\vec{u_3} = (0, 
+      3, 4)$;
+    \item $\vec{u_1} = (1, 0, 1)$, $\vec{u_2} = (0, 1, 2)$, $\vec{u_3} = (2, 1, 
+      0)$.
+  \end{enumerate}
+  \item Find an orthonormal basis for the subspace of $\reals^4$ spanned by 
+    $(1, 0, 1, 0)$, $(1, 1, 1, 0)$ and $(1, -1, 0, 1)$.
+  \moditem{*} Orthogonally diagonalise the matrix $A$, where
+  \begin{enumerate}
+    \item $A =
+      \begin{pmatrix}
+        1 & 2 \\
+        2 & -2
+      \end{pmatrix}
+      $; and
+    \item $A =
+      \begin{pmatrix}
+        2 & 1 & 1 \\
+        1 & 2 & 1 \\
+        1 & 1 & 2
+      \end{pmatrix}
+      $.
+  \end{enumerate}
+\end{modenumerate}
+
+\end{document}
+
