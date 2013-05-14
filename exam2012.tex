@@ -1,0 +1,136 @@
+\documentclass[english,12pt,a4paper]{scrartcl}
+\usepackage{multicol}
+\usepackage{mdframed}
+\usepackage[cm]{anton}
+
+\renewcommand{\vec}[1]{\bm{#1}}
+
+\title{MATH10202 linear algebra}
+\subtitle{2012 exam}
+\author{}
+\date{\vspace{-5ex}}
+
+\DeclareMathOperator{\spn}{span}
+\newcommand\spanset[1]{\ensuremath{\spn\set{#1}}}
+
+\begin{document}
+\maketitle
+
+\begin{itemize}
+  \item[A3 (i)] Let $A$ be the following $4 \times 4$ matrix:
+    \[
+      A =
+      \begin{pmatrix}
+        1 & 2 & 2 & 3 \\
+        2 & 3 & 3 & 4 \\
+        3 & 4 & 4 & 5 \\
+        4 & 5 & 5 & 6
+      \end{pmatrix}.
+    \]
+    Find a lower triangular matrix $L$ and an upper triangular matrix $U$ so 
+    that $A = LU$.
+
+    \textbf{Rough solution.} We want to write $A$ as the product of a lower and 
+    upper triangular matrix. Thus, your first instinct should be to row reduce 
+    $A$ to an upper triangular matrix. Don't worry about getting it to 
+    (reduced) row-echelon form---here, we don't need leading $1$s in the rows.  
+
+    Begin with
+    \[
+      \begin{pmatrix}
+        1 & 2 & 2 & 3 \\
+        2 & 3 & 3 & 4 \\
+        3 & 4 & 4 & 5 \\
+        4 & 5 & 5 & 6
+      \end{pmatrix}
+      \refrel{$\substack{r_2 \to r_2 - 2r_1 \\ r_3 \to r_3 - 3r_1 \\ r_4 \to 
+      r_4 - 4r_1}$}{\to}
+      \begin{pmatrix}
+        1 & 2 & 2 & 3 \\
+        0 & -1 & -1 & -2 \\
+        0 & -2 & -2 & -4 \\
+        0 & -3 & -3 & -6
+      \end{pmatrix}
+      \refrel{$\substack{r_3 \to r_3 - 2r_2 \\ r_4 \to r_4 -3r_2}$}{\to}
+      \begin{pmatrix}
+        1 & 2 & 2 & 3 \\
+        0 & -1 & -1 & -2 \\
+        0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0
+      \end{pmatrix} = U.
+    \]
+    So we have an upper triangular matrix $U$.
+
+    Now write out the elementary matrices used to transform $A$ to $U$. For 
+    example, I used
+    \[
+      E_1 =
+      \begin{pmatrix}
+        1 & 0 & 0 & 0 \\
+        -2 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1
+      \end{pmatrix},
+      \ E_2 =
+      \begin{pmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        -3 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1
+      \end{pmatrix},
+      \ E_3
+      \begin{pmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0 \\
+        -4 & 0 & 0 & 1
+      \end{pmatrix}
+    \]
+    in the first step and then
+    \[
+      E_4 =
+      \begin{pmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & -2 & 1 & 0 \\
+        0 & 0 & 0 & 1
+      \end{pmatrix},
+      \ E_5 =
+      \begin{pmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0 \\
+        0 & -3 & 0 & 1
+      \end{pmatrix}.
+    \]
+    So $E_5 E_4 E_3 E_2 E_1 A = U$. Rearranging, we have $A = E_1^{-1} E_2^{-1} 
+    E_3^{-1} E_4^{-1} E_5^{-1} U$. Then compute
+    \[
+      E_1^{-1} E_2^{-1} E_3^{-1} E_4^{-1} E_5^{-1} = \dots =
+      \begin{pmatrix}
+        1 & 0 & 0 & 0 \\
+        2 & 1 & 0 & 0 \\
+        3 & 2 & 1 & 0 \\
+        4 & 3 & 0 & 1
+      \end{pmatrix} = L.
+    \]
+    Now check that $LU = A$ to ensure that your solution is correct!
+
+    \textbf{Note 1.} We get $L$ to be lower triangular because none of the 
+    elementary row operations used were row-swaps. This is because the 
+    elementary matrix for a row swap has a nonzero element above the diagonal.
+
+    \textbf{Note 2.} Also note that we have deliberately chosen the elementary 
+    row operations to work down from the top of columns, i.e. if we have a 
+    corresponding elementary matrix with nonzero entry \emph{above} the 
+    diagonal, then we wouldn't get a lower triangular matrix.
+
+    \textbf{Note 3.} Writing $A = LU$ is called $LU$ factorisation---see Poole 
+    section 3.4. In fact, there is a \emph{much} quicker method (but 
+    equivalent) to finding $L$ on page 181 of Poole. I don't want to confuse 
+    anyone, so I won't go into that method here. However, it is quite easy to 
+    understand if you have a few minutes to spare.
+\end{itemize}
+
+\end{document}
+
