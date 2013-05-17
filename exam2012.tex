@@ -130,6 +130,66 @@
     equivalent) to finding $L$ on page 181 of Poole. I don't want to confuse 
     anyone, so I won't go into that method here. However, it is quite easy to 
     understand if you have a few minutes to spare.
+  \item[B7] Let $V$ denote the vector space which is the span of the set $S = 
+    \set{\upe^{\lambda x} | \lambda \in \reals}$. Prove that $V$ does not have 
+    finite dimension.
+
+    \textbf{Note.} To understand/believe the following proof, you need to be 
+    comfortable with limits. See sequences and series.
+
+    \textbf{Proof.} First, note that if $S$ is linearly independent, we can 
+    deduce that it is a basis for $V$ (since $\spn(S) = V$). So we show that 
+    $S$ is linearly independent.
+
+    Suppose that for distinct $\lambda_1 < \lambda_2 < \dots < \lambda_n \in 
+    \reals$ and some $a_1, a_2, \dots, a_n \in \reals$ we have
+    \begin{equation} \label{eqn:sum1}
+      a_1 \upe^{\lambda_1 x} + \dots + a_n \upe^{\lambda_n x} \equiv 0.
+    \end{equation}
+
+    Dividing by the largest term $\upe^{\lambda_n x}$ we get
+    \[
+      a_1 \upe^{(\lambda_1 - \lambda_n) x} + \dots + a_{n - 1} 
+      \upe^{(\lambda_{n - 1} - \lambda_n) x} + a_n \equiv 0,
+    \]
+    and this holds for all $x \in \reals$. So for any $i \in \set{1, 2, \dots, 
+    n - 1}$ we have $\upe^{(\lambda_i - \lambda_n) x} \to 0$ as $x \to \infty$.  
+    (Convince yourself of this.) So when $x$ is very large we are left with
+    \begin{equation} \label{eqn:limsum}
+      0 = \lim_{x \to \infty} a_1 \upe^{(\lambda_1 - \lambda_n) x} + \dots + 
+      a_{n - 1} \upe^{(\lambda_{n - 1} - \lambda_n) x} + a_n = a_n.
+    \end{equation}
+
+    Repeating this argument for the remaining terms, we get that
+    \[
+      a_1 = a_2 = \dots = a_{n - 1} = a_n = 0,
+    \]
+    Therefore $S$ is linearly independent and is hence a basis for $V$. Since 
+    $S$ consists of infinitely many terms, it follows that $V$ is infinite 
+    dimensional. \hfill $\square$
+
+    \textbf{Note 1.} This proof requires a bit of ingenuity (!), which is why a 
+    relatively short proof is probably worth 20 marks. Since there are no 
+    `optional' questions on this year's exam, I can't see such a question 
+    appearing this year. But as usual, don't take my word for it.
+
+    \textbf{Note 2.} When you see exponential terms appearing in questions, you 
+    should think about:
+    \begin{enumerate}
+      \item Can I use logarithms? (Not in this question, because we have the 
+        sum of $\upe^{ax}$ terms, which doesn't give us anything easier to work 
+        with.)
+      \item What happens if I set $x = 0$? (If you do this in~\eqref{eqn:sum1}, 
+        you learn something about the coefficients.)
+      \item How fast do things grow?
+    \end{enumerate}
+    In this question, the last point is the most important. In 
+    fact,~\eqref{eqn:limsum} means: ``The largest term eventually dominates the 
+    other terms.'' This means that, if you drew the graph of $a_1 
+    \upe^{\lambda_1 x} + \dots + a_n \upe^{\lambda_n x}$ (going along in the 
+    positive $x$-direction), it would eventually look like $a_n \upe^{\lambda_n 
+    x}$. This is why exponential growth (or decay) is so interesting in 
+    mathematics. See sequences and series!
 \end{itemize}
 
 \end{document}
