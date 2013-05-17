@@ -132,41 +132,51 @@
     understand if you have a few minutes to spare.
   \item[B7] Let $V$ denote the vector space which is the span of the set $S = 
     \set{\upe^{\lambda x} | \lambda \in \reals}$. Prove that $V$ does not have 
-    finite dimension.
+    finite dimension. (It is not clear which field we are working in, but we 
+    assume that $x$ takes values in $\reals$.)
 
     \textbf{Note.} To understand/believe the following proof, you need to be 
-    comfortable with limits. See sequences and series.
+    comfortable with limits. I do not think this is unfair, since a limit 
+    appears in the previous question. See sequences and series.
 
-    \textbf{Proof.} First, note that if $S$ is linearly independent, we can 
-    deduce that it is a basis for $V$ (since $\spn(S) = V$). So we show that 
-    $S$ is linearly independent.
-
-    Suppose that for distinct $\lambda_1 < \lambda_2 < \dots < \lambda_n \in 
-    \reals$ and some $a_1, a_2, \dots, a_n \in \reals$ we have
-    \begin{equation} \label{eqn:sum1}
-      a_1 \upe^{\lambda_1 x} + \dots + a_n \upe^{\lambda_n x} \equiv 0.
-    \end{equation}
-
-    Dividing by the largest term $\upe^{\lambda_n x}$ we get
+    \textbf{Proof.} Suppose for contraction that $V$ is finite dimensional, so 
+    suppose that $B = \set{\upe^{\lambda_1 x}, \upe^{\lambda_2 x}, \dots, 
+    \upe^{\lambda_n x}}$ is a basis for some $\lambda_1, \dots, \lambda_n \in 
+    \reals$. We may, without loss of generality, suppose that $\lambda_1 < 
+    \lambda_2 < \dots < \lambda_n$.
+    
+    We now want to show that there is some element in $V$ that is not in 
+    $\spn(B)$. First, recall that $\upe^{\lambda x}$ grows exponentially fast 
+    as $x$ increases/decays exponentially fast as $x$ decreases. Let's consider 
+    any $\lambda_{n + 1} \in \reals$, where $\lambda_{n + 1} > \lambda_n$ (so 
+    $\lambda_{n + 1} > \lambda_i$ for each $i = 1, \dots, n$). Suppose that 
+    there exists $a_1, a_2, \dots, a_n \in \reals$ such that
     \[
-      a_1 \upe^{(\lambda_1 - \lambda_n) x} + \dots + a_{n - 1} 
-      \upe^{(\lambda_{n - 1} - \lambda_n) x} + a_n \equiv 0,
+      \upe^{\lambda_{n + 1} x} = a_1 \upe^{\lambda_1 x} + a_2 \upe^{\lambda_2 
+      x} + \dots + a_n \upe^{\lambda_n x}.
     \]
-    and this holds for all $x \in \reals$. So for any $i \in \set{1, 2, \dots, 
-    n - 1}$ we have $\upe^{(\lambda_i - \lambda_n) x} \to 0$ as $x \to \infty$.  
-    (Convince yourself of this.) So when $x$ is very large we are left with
-    \begin{equation} \label{eqn:limsum}
-      0 = \lim_{x \to \infty} a_1 \upe^{(\lambda_1 - \lambda_n) x} + \dots + 
-      a_{n - 1} \upe^{(\lambda_{n - 1} - \lambda_n) x} + a_n = a_n.
+    Dividing through by $\upe^{\lambda_{n + 1} x}$, we get
+    \begin{equation} \label{eqn:sum2}
+      1 = a_1 \upe^{(\lambda_1 - \lambda_{n + 1}) x} + a_2 \upe^{(\lambda_2 - 
+        \lambda_{n + 1}) x} + \dots + a_n \upe^{(\lambda_n - \lambda_{n + 1}) 
+      x}.
     \end{equation}
-
-    Repeating this argument for the remaining terms, we get that
+    (When we are dealing with functions, any identities like this must hold for 
+    all $x \in \reals$.)
+    
+    We observe that $\lambda_i - \lambda_{n + 1} < 1$ for each $i = 1, 2, 
+    \dots, n$. So terms of the form $\upe^{(\lambda_i - \lambda_{n + 1}) x}$ 
+    tend to zero as $x \to \infty$. Therefore, taking the limit 
+    of~\eqref{eqn:sum2} as $x \to \infty$, we have
     \[
-      a_1 = a_2 = \dots = a_{n - 1} = a_n = 0,
+      1 = \lim_{x \to \infty} a_1 \upe^{(\lambda_1 - \lambda_{n + 1}) x} + a_2 
+      \upe^{(\lambda_2 - \lambda_{n + 1}) x} + \dots + a_n \upe^{(\lambda_n - 
+        \lambda_{n + 1}) x} = 0,
     \]
-    Therefore $S$ is linearly independent and is hence a basis for $V$. Since 
-    $S$ consists of infinitely many terms, it follows that $V$ is infinite 
-    dimensional. \hfill $\square$
+    a contradiction.
+    
+    Therefore there does not exist a finite basis for $V$ and so we deduce that 
+    $V$ is infinite dimensional. \hfill $\square$
 
     \textbf{Note 1.} This proof requires a bit of ingenuity (!), which is why a 
     relatively short proof is probably worth 20 marks. Since there are no 
@@ -179,17 +189,13 @@
       \item Can I use logarithms? (Not in this question, because we have the 
         sum of $\upe^{ax}$ terms, which doesn't give us anything easier to work 
         with.)
-      \item What happens if I set $x = 0$? (If you do this in~\eqref{eqn:sum1}, 
-        you learn something about the coefficients.)
-      \item How fast do things grow?
+      \item If $x = 0$, then $\upe^{\lambda x} = 1$.
+      \item How fast do things grow or decay?
+      \item Possibly trigonometric functions.
     \end{enumerate}
-    In this question, the last point is the most important. In 
-    fact,~\eqref{eqn:limsum} means: ``The largest term eventually dominates the 
-    other terms.'' This means that, if you drew the graph of $a_1 
-    \upe^{\lambda_1 x} + \dots + a_n \upe^{\lambda_n x}$ (going along in the 
-    positive $x$-direction), it would eventually look like $a_n \upe^{\lambda_n 
-    x}$. This is why exponential growth (or decay) is so interesting in 
-    mathematics. See sequences and series!
+    In fact, the main part of this proof involves showing that any sum of 
+    exponential functions will not give you an exponential with a different 
+    term in the exponent.
 \end{itemize}
 
 \end{document}
